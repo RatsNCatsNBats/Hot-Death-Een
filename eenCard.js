@@ -11,7 +11,7 @@ function isWithinInterval(t1, t2) {
 
 function onMouseUp() {
 
-	// if we're in modal mode ignore any clicks
+	// if we're modal ignore any clicks
 
 	if (isModal) {
 		return;
@@ -208,6 +208,91 @@ class Card extends PIXI.Sprite {
 		this.setFaceUp(!this.faceUp);
 	}
 
+	// is the Shitter legal to play?
+	//   topDiscard - handle to the Card on top of the Discard pile
+
+	isShitterLegal(topDiscard) {
+
+		// can play it on Magic Five or Holy Defender
+
+		if (topDiscard.cardName == "Magic Five" || topDiscard.cardName == "Holy Defender") {
+			return true;
+
+		// can play if the player has one card left and the top discard is yellow or a zero
+
+		} else if (theTable.currentPlayer.hand.cards.children.length == 1) {
+			if (topDiscard.cardColor == "Y" || topDiscard.cardGlyph == "0") {
+				return true;
+			}
+		}
+
+		// otherwise you can't play it
+
+		return false;
+	}
+
+	// is a wild draw legal to play?
+	//   topDiscard - handle to the Card on top of the Discard pile
+
+	isWildLegal(topDiscard) {
+
+		// wild draw cards cannot be played unless the player has no cards that match the color of the top discard
+
+		if (this.cardName == "Harvester of Sorrows" ||
+			this.cardName == "Delayed Blast" ||
+			this.cardName == "Hot Death" ||
+			this.cardName == "Wild Draw Four") {
+			if (theTable.currentPlayer.hand.hasAnyColor(topDiscard.cardColor)) {
+				return false;
+			}
+		}
+
+		// otherwise yes
+
+		return true;
+	}
+
+	// figure out situations involving Sixty Nine
+
+	isSixtyNineLegal(topDiscard) {
+
+		// if the glyphs match, allow it
+
+		if (topDiscard.cardGlyph == "6" && this.cardGlyph == "6") {
+			return true;
+		}
+
+		if (topDiscard.cardGlyph == "9" && this.cardGlyph == "9") {
+			return true;
+		}
+
+		// Sixty Nine itself can be played on a Six or Nine and vice versa
+
+		if (this.cardGlyph == "69" &&
+			(topDiscard.cardGlyph == "6" || topDiscard.cardGlyph == "9")) {
+			return true;
+		}
+
+		if (topDiscard.cardGlyph == "69" &&
+			(this.cardGlyph == "6" || this.cardGlyph == "9")) {
+			return true;
+		}
+
+		// mismatching Sixes and Nines can be played while holding Sixty Nine
+
+		if ((this.cardGlyph == "6" || this.cardGlyph == "9") &&
+			(topDiscard.cardGlyph == "6" || topDiscard.cardGlyph == "9")) {
+			if (theTable.currentPlayer.hand.hasCard("Sixty Nine")) {
+				return true;
+			}
+			return false;
+		}
+
+		// shouldn't reach here, all possibilities should be accounted for
+
+		return false;
+	}
+
 	// determine if it would be legal to play this card on the current discard pile
 
 	isLegalMove() {
@@ -217,54 +302,27 @@ class Card extends PIXI.Sprite {
 		var topDiscard = theDiscard.getTopCard();
 
 		// the Shitter
-		// this rule is not working
 
 		if (this.cardName == "Shitter") {
-
-			// can play it on Magic Five or Holy Defender
-
-			if (topDiscard.cardName == "Magic Five" || topDiscard.cardName == "Holy Defender") {
-				return true;
-
-			// can play if the player has one card left and the top discard is yellow or a zero
-
-			} else if (theTable.currentPlayer.hand.children.length == 1) {
-				if (topDiscard.cardColor == "Y" || topDiscard.cardGlyph == "0") {
-					return true;
-				}
-			}
-
-			// otherwise you can't play it
-
-			return false;
+			return this.isShitterLegal(topDiscard);
 		}
 
 		// you can play the Magic Five on anything
-		// this rule is working fine
 
 		if (this.cardName == "Magic Five") {
 			return true;
 		}
 
+		// handle situations possibly involving Sixty Nine
+
+		if (/(6|9)/.test(this.cardGlyph) && /(6|9)/.test(topDiscard.cardGlyph)) {
+			return this.isSixtyNineLegal(topDiscard);
+		}
+
 		// you can play a wild on anything but wild draws have more rules about that
 
 		if (this.cardColor == "W") {
-
-			// wild draw cards cannot be played unless the player has no cards that match the color of the top discard
-			// this rule doesn't appear to be working
-
-			if (this.cardName == "Harvester of Sorrows" ||
-				this.cardName == "Delayed Blast" ||
-				this.cardName == "Hot Death" ||
-				this.cardName == "Wild Draw Four") {
-				if (theTable.currentPlayer.hand.hasAnyColor(topDiscard.cardColor)) {
-					return false;
-				}
-			}
-
-			// otherwise yes
-
-			return true;
+			return this.isWildLegal(topDiscard);
 		}
 
 		// if this card matches color with the top discard, you can play it

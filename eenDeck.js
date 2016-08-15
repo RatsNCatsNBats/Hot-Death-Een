@@ -32,13 +32,31 @@ class Deck {
 	// shuffling algorithm stolen from the internet
 
 	shuffle() {
-		var j, x, i, y;
-	    for (i = this.cards.children.length; i; --i) {
-	        j = Math.floor(Math.random() * i);
-	        x = this.cards.getChildAt(i - 1);
-	        y = this.cards.getChildAt(j);
+	    for (var i = this.cards.children.length; i; --i) {
+	        var j = Math.floor(Math.random() * i);
+	        var x = this.cards.getChildAt(i - 1);
+	        var y = this.cards.getChildAt(j);
 	        this.cards.swapChildren(x, y);
 	    }
+	    this.moveToTop("Red Nine");
+	    this.moveToTop("Yellow Nine");
+	    this.moveToTop("Green Six");
+	    this.moveToTop("Red Six");
+	    this.moveToTop("Sixty Nine");
+	    this.moveToTop("Blue Nine");
+	}
+
+	// debugging helper
+
+	moveToTop(cardName) {
+		for (var i = this.cards.children.length; i; --i) {
+			var kid = this.cards.getChildAt(i - 1);
+			if (kid.cardName == cardName) {
+				this.cards.removeChild(kid);
+				this.pushCard(kid);
+				return;
+			}
+		}
 	}
 }
 
@@ -257,8 +275,8 @@ theDeck.pushCard(new Card(textureRedDrawTwo, "Red Draw Two", "R", "D"));
 theDeck.pushCard(new Card(textureRedDrawTwo, "Red Draw Two", "R", "D"));
 theDeck.pushCard(new Card(textureRedDrawTwo, "Red Draw Two", "R", "D"));
 
-theDeck.pushCard(new Card(textureShitter, "Yellow ", "Y", "0"));
-theDeck.pushCard(new Card(textureYellowZero, "Yellow ", "Y", "0"));
+theDeck.pushCard(new Card(textureShitter, "Shitter", "Y", "0"));
+theDeck.pushCard(new Card(textureYellowZero, "Yellow Zero", "Y", "0"));
 
 theDeck.pushCard(new Card(textureMutuallyAssuredDestruction, "Mutually Assured Destruction", "Y", "1"));
 theDeck.pushCard(new Card(textureYellowOne, "Yellow One", "Y", "1"));

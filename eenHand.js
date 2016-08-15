@@ -47,29 +47,34 @@ class Hand {
 	// reposCards repositions to fix holes left by playing a card
 
 	reposCards() {
-
-		// get the number of cards in this hand
-
-		var numCards = this.cards.children.length;
-
-		for (var i = 0; i < numCards; ++i) {
-
-			// get the card and reposition it
-
-			var card = this.cards.getChildAt(i);
-
-			card.position.x = 60 + (40 * i);
+		for (var i = this.cards.children.length; i; --i) {
+			var index = i - 1;
+			var card = this.cards.getChildAt(index);
+			card.position.x = 60 + (40 * index);
 			card.position.y = 90;
 		}
+	}
+
+	// function to check if this hand has a specific card
+	//   cardName - the name of the card to search for
+
+	hasCard(cardName) {
+		for (var i = this.cards.children.length; i; --i) {
+			var card = this.cards.getChildAt(i - 1);
+			if (card.cardName == cardName) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	// function to check if there are any cards in this hand matching a color
 	//   cardColor - one of 'B', 'G', 'R', or 'Y'
 
 	hasAnyColor(cardColor) {
-		for (var i = this.cards.length; i; --i) {
+		for (var i = this.cards.children.length; i; --i) {
 			var card = this.cards.getChildAt(i - 1);
-			if (card.cardColor == cardColor) {
+			if (card.cardColor == cardColor && card.cardName != "Shitter") {
 				return true;
 			}
 		}
