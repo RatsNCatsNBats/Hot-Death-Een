@@ -1,4 +1,6 @@
 
+// Player object to contain AI
+
 class Player extends PIXI.Sprite {
 
 	constructor(playerName) {
@@ -7,5 +9,7 @@ class Player extends PIXI.Sprite {
 		this.hand = new Hand(this.playerName);
 	}
 }
+
+// special player object for human player
 
 var player1 = new Player("User");

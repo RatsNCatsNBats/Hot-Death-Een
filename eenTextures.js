@@ -1,4 +1,6 @@
 
+// create all the Texture objects used
+
 var textureHarvesterOfSorrows =			PIXI.Texture.fromImage('_assets/000HarvesterOfSorrows.png');
 var textureHarvesterOfSorrowsBlue =		PIXI.Texture.fromImage('_assets/000HarvesterOfSorrowsBlue.png');
 var textureHarvesterOfSorrowsGreen =	PIXI.Texture.fromImage('_assets/000HarvesterOfSorrowsGreen.png');

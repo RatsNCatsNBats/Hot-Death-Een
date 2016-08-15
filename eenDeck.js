@@ -1,15 +1,35 @@
 
+// singleton class to govern the draw deck part of the table
+
 class Deck {
 
 	constructor() {
+
+		// make a PIXI Contatiner to hols the Card objects and add it to the stage
+
 		this.cards = new PIXI.Container();
 	    stage.addChild(this.cards);
 	}
 
+	// adds a card to the top of the deck
+
 	pushCard(card) {
+
+		// turn the card face down
+
+		card.setFaceUp(false);
+
+		// set the card's location to "Deck"
+
 		card.loc = "Deck";
+
+		// add it to this.cards
+
 		this.cards.addChild(card);
 	}
+
+	// shuffle all the cards currently in the deck
+	// shuffling algorithm stolen from the internet
 
 	shuffle() {
 		var j, x, i, y;
@@ -22,7 +42,11 @@ class Deck {
 	}
 }
 
+// INSTANTIATE THE SINGLETON!
+
 var theDeck = new Deck();
+
+// create the 216 individual cards in the full deck
 
 theDeck.pushCard(new Card(textureHarvesterOfSorrows, "Harvester of Sorrows", "W", "*"));
 theDeck.pushCard(new Card(textureDelayedBlast, "Delayed Blast", "W", "*"));
