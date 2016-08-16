@@ -107,8 +107,26 @@ class Card extends PIXI.Sprite {
 
 	    // position the card
 
-	    this.position.x = Math.floor((window.innerWidth / 2) - 60);
-	    this.position.y = Math.floor(window.innerHeight / 2);
+	    var newX = Math.floor((window.innerWidth / 2) - 60);
+	    var newY = Math.floor(window.innerHeight / 2);
+	    this.moveCardTo(newX, newY);
+	}
+
+	// animate moving to a new position
+
+	moveCardTo(newX, newY) {
+		var oldX = this.x;
+		var oldY = this.y;
+		var dirX = ((newX - oldX) < 0) ? -1 : 1;
+		var dirY = ((newY - oldY) < 0) ? -1 : 1;
+		var deltaX = dirX*Math.floor(Math.abs(newX - oldX) / 6);
+		var deltaY = dirY*Math.floor(Math.abs(newY - oldY) / 6);
+		for (var i = 1; i < 6; i++) {
+			this.x += deltaX;
+			this.y += deltaY;
+		}
+		this.x = newX;
+		this.y = newY;
 	}
 
 	// call this to use the blue version of a wild card's image
@@ -267,6 +285,12 @@ class Card extends PIXI.Sprite {
 			return true;
 		}
 
+		// if colors match, allow it
+
+		if (this.cardColor == topDiscard.cardColor) {
+			return true;
+		}
+
 		// Sixty Nine itself can be played on a Six or Nine and vice versa
 
 		if (this.cardGlyph == "69" &&
@@ -283,9 +307,6 @@ class Card extends PIXI.Sprite {
 
 		if ((this.cardGlyph == "6" || this.cardGlyph == "9") &&
 			(topDiscard.cardGlyph == "6" || topDiscard.cardGlyph == "9")) {
-			if (this.cardColor == topDiscard.cardColor) {
-				return true;
-			}
 			if (theTable.currentPlayer.hand.hasCard("Sixty Nine")) {
 				return true;
 			}

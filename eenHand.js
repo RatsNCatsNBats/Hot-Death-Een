@@ -36,8 +36,9 @@ class Hand {
 
 		// position it at the end of the hand
 
-		card.position.x = 60 + (40 * this.cards.children.length);
-		card.position.y = 90;
+		var newX = 60 + (40 * this.cards.children.length);
+		var newY = 90;
+		card.moveCardTo(newX, newY);
 
 		// put it in our cards property, a Container object
 
@@ -47,11 +48,11 @@ class Hand {
 	// reposCards repositions to fix holes left by playing a card
 
 	reposCards() {
-		for (var i = this.cards.children.length; i; --i) {
-			var index = i - 1;
-			var card = this.cards.getChildAt(index);
-			card.position.x = 60 + (40 * index);
-			card.position.y = 90;
+		for (var i = this.cards.children.length - 1; i >= 0; i--) {
+			var card = this.cards.getChildAt(i);
+			var newX = 60 + (40 * i);
+			var newY = 90;
+			card.moveCardTo(newX, newY);
 		}
 	}
 
@@ -59,8 +60,8 @@ class Hand {
 	//   cardName - the name of the card to search for
 
 	hasCard(cardName) {
-		for (var i = this.cards.children.length; i; --i) {
-			var card = this.cards.getChildAt(i - 1);
+		for (var i = this.cards.children.length - 1; i >= 0; i--) {
+			var card = this.cards.getChildAt(i);
 			if (card.cardName == cardName) {
 				return true;
 			}
@@ -72,8 +73,8 @@ class Hand {
 	//   cardColor - one of 'B', 'G', 'R', or 'Y'
 
 	hasAnyColor(cardColor) {
-		for (var i = this.cards.children.length; i; --i) {
-			var card = this.cards.getChildAt(i - 1);
+		for (var i = this.cards.children.length - 1; i >= 0; i--) {
+			var card = this.cards.getChildAt(i);
 			if (card.cardColor == cardColor && card.cardName != "Shitter") {
 				return true;
 			}

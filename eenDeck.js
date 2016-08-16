@@ -38,19 +38,20 @@ class Deck {
 	        var y = this.cards.getChildAt(j);
 	        this.cards.swapChildren(x, y);
 	    }
-	    this.moveToTop("Red Nine");
-	    this.moveToTop("Yellow Nine");
-	    this.moveToTop("Green Six");
-	    this.moveToTop("Red Six");
-	    this.moveToTop("Sixty Nine");
-	    this.moveToTop("Blue Nine");
+	    //this.moveToTop("Red Nine");
+	    //this.moveToTop("Yellow Nine");
+	    //this.moveToTop("Green Six");
+	    //this.moveToTop("Red Six");
+	    //this.moveToTop("Sixty Nine");
+	    //this.moveToTop("Blue Nine");
 	}
 
 	// debugging helper
 
 	moveToTop(cardName) {
-		for (var i = this.cards.children.length; i; --i) {
-			var kid = this.cards.getChildAt(i - 1);
+
+		for (var i = this.cards.children.length - 1; i >= 0; i--) {
+			var kid = this.cards.getChildAt(i);
 			if (kid.cardName == cardName) {
 				this.cards.removeChild(kid);
 				this.pushCard(kid);

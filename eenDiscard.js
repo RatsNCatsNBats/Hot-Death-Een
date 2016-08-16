@@ -12,8 +12,9 @@ class Discard {
 	playCard(card) {
 		card.loc = "Discard";
 		card.setFaceUp(true);
-		card.position.x = Math.floor((window.innerWidth / 2) + 60);
-	    card.position.y = Math.floor(window.innerHeight / 2);
+		var newX = Math.floor((window.innerWidth / 2) + 60);
+	    var newY = Math.floor(window.innerHeight / 2);
+	    card.moveCardTo(newX, newY);
 	    this.pile.addChild(card);
 	}
 
