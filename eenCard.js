@@ -253,6 +253,7 @@ class Card extends PIXI.Sprite {
 	}
 
 	// figure out situations involving Sixty Nine
+	//   topDiscard - handle to the Card on top of the Discard pile
 
 	isSixtyNineLegal(topDiscard) {
 
@@ -282,6 +283,9 @@ class Card extends PIXI.Sprite {
 
 		if ((this.cardGlyph == "6" || this.cardGlyph == "9") &&
 			(topDiscard.cardGlyph == "6" || topDiscard.cardGlyph == "9")) {
+			if (this.cardColor == topDiscard.cardColor) {
+				return true;
+			}
 			if (theTable.currentPlayer.hand.hasCard("Sixty Nine")) {
 				return true;
 			}
@@ -289,6 +293,10 @@ class Card extends PIXI.Sprite {
 		}
 
 		// shouldn't reach here, all possibilities should be accounted for
+
+		console.log("something is wrong in isSixtyNineLegal");
+		console.log("this: " + this.cardName + " " + this.cardColor + " " + this.cardGlyph);
+		console.log("topDiscard: " + topDiscard.cardName + " " + topDiscard.cardColor + " " + topDiscard.cardGlyph);
 
 		return false;
 	}
