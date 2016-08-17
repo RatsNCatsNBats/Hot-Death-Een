@@ -9,6 +9,8 @@ class Discard {
 	    stage.addChild(this.pile);
 	}
 
+	// plays a card into the Discard pile
+
 	playCard(card) {
 		card.loc = "Discard";
 		card.setFaceUp(true);
@@ -18,6 +20,8 @@ class Discard {
 	    this.pile.addChild(card);
 	    theTable.currentPlayer.hand.reposCards();
 	}
+
+	// returns the Card object on top of the pile
 
 	getTopCard() {
 		return this.pile.children[this.pile.children.length - 1];

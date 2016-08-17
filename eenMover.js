@@ -1,5 +1,15 @@
 
+// class to control movement of a card
+// has a moveCount property that is decremented every update and the Mover deletes itself after it reaches 0
+
 class Mover {
+
+	// card - the moving Card object
+	// deltaX - the amount to change the x value each frame
+	// deltaY - the amount to change the y value each frame
+	// newX - the final x value
+	// newY - the final y value
+
 	constructor(card, deltaX, deltaY, newX, newY) {
 		//this.player = theTable.currentPlayer;
 		this.moveCount = 5;
@@ -7,20 +17,23 @@ class Mover {
 		this.step = [deltaX, deltaY];
 		this.newX = newX;
 		this.newY = newY;
-		//console.log("moveCount: " + this.moveCount + " step: " + this.step + " newX: " + this.newX + " newY: " + this.newY);
 	}
 
+	// moves the card one frame
+	// called by update()
+
 	move(index) {
-		//console.log("index: " + index);
-		if (this.moveCount) {
+		if (this.moveCount) { // haven't reached final destination yet
 			this.card.x += this.step[0];
 			this.card.y += this.step[1];
-			//console.log("moving " + this.card.x + ", " + this.card.y);
 			this.moveCount--;
-		} else {
+		} else { // reached the end
 			this.card.x = this.newX;
 			this.card.y = this.newY;
-			//console.log("moving: " + moving + " about to splice at: " + index);
+
+			// delete self from moving array
+			// Array.splice was acting funny so I did it this way
+
 			if (moving.length == 1) {
 				moving = [];
 			} else {
@@ -34,7 +47,6 @@ class Mover {
 					moving = left.concat(right);
 				}
 			}
-			//console.log("moving: " + moving);
 		}
 	}
 }

@@ -5,11 +5,11 @@ requestAnimationFrame(update);
 
 function update() {
 
+	// moving is an array of Card objects that are currently moving
+
 	if (moving.length) {
-		//console.log("moving.length: " + moving.length);
 		for (var i = moving.length - 1; i >= 0; i--) {
 			var mover = moving[i];
-			//console.log("mover: " + mover.card.cardName);
 			mover.move(i);
 		}
 	}

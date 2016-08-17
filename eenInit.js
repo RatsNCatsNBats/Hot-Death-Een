@@ -4,7 +4,7 @@
 
 var isModal = false;
 
-// variable to hold the currently moving Card object for use by update()
+// variable to hold the currently moving Card objects for use by update()
 
 var moving = [];
 

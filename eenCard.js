@@ -105,7 +105,6 @@ class Card extends PIXI.Sprite {
 	// animate moving to a new position
 
 	moveCardTo(newX, newY) {
-		//console.log("moving card to " + newX + ", " + newY);
 		var dirX = newX - this.x;
 		var dirY = newY - this.y;
 		var deltaX = Math.floor(dirX / 6);
