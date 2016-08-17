@@ -26,6 +26,12 @@ class Deck {
 		// add it to this.cards
 
 		this.cards.addChild(card);
+
+	    // position the card
+
+	    card.x = (Math.floor(window.innerWidth / 2) - 60);
+	    card.y = Math.floor(window.innerHeight / 2);
+	    //card.moveCardTo(newX, newY);
 	}
 
 	// shuffle all the cards currently in the deck

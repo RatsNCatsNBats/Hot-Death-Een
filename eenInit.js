@@ -4,6 +4,10 @@
 
 var isModal = false;
 
+// variable to hold the currently moving Card object for use by update()
+
+var moving = [];
+
 // Create the renderer
 
 var renderer = PIXI.autoDetectRenderer(800, 600);

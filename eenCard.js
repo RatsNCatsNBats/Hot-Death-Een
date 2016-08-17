@@ -47,10 +47,6 @@ function onMouseUp() {
 				}
 
 				theDiscard.playCard(this);
-
-				// reposition the cards in the player's hand to fix the hole
-
-				theTable.getPlayer().hand.reposCards();
 			}
 		}
 	}
@@ -104,29 +100,18 @@ class Card extends PIXI.Sprite {
 	        .on('mouseupoutside', onMouseUp)
 	        .on('touchend', onMouseUp)
 	        .on('touchendoutside', onMouseUp);
-
-	    // position the card
-
-	    var newX = Math.floor((window.innerWidth / 2) - 60);
-	    var newY = Math.floor(window.innerHeight / 2);
-	    this.moveCardTo(newX, newY);
 	}
 
 	// animate moving to a new position
 
 	moveCardTo(newX, newY) {
-		var oldX = this.x;
-		var oldY = this.y;
-		var dirX = ((newX - oldX) < 0) ? -1 : 1;
-		var dirY = ((newY - oldY) < 0) ? -1 : 1;
-		var deltaX = dirX*Math.floor(Math.abs(newX - oldX) / 6);
-		var deltaY = dirY*Math.floor(Math.abs(newY - oldY) / 6);
-		for (var i = 1; i < 6; i++) {
-			this.x += deltaX;
-			this.y += deltaY;
-		}
-		this.x = newX;
-		this.y = newY;
+		//console.log("moving card to " + newX + ", " + newY);
+		var dirX = newX - this.x;
+		var dirY = newY - this.y;
+		var deltaX = Math.floor(dirX / 6);
+		var deltaY = Math.floor(dirY / 6);
+		var mover = new Mover(this, deltaX, deltaY, newX, newY);
+		moving.push(mover);
 	}
 
 	// call this to use the blue version of a wild card's image

@@ -16,6 +16,7 @@ class Discard {
 	    var newY = Math.floor(window.innerHeight / 2);
 	    card.moveCardTo(newX, newY);
 	    this.pile.addChild(card);
+	    theTable.currentPlayer.hand.reposCards();
 	}
 
 	getTopCard() {
