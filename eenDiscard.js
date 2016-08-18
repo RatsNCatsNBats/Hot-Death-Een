@@ -49,6 +49,6 @@ window.addEventListener("resize", function(event) {
 
 theDiscard.playCard(theDeck.cards.children[theDeck.cards.children.length - 1]);
 var topDiscard = theDiscard.getTopCard();
-if (card.cardColor == "W") {
-	var colorPicker = new ColorPicker(card);
+if (topDiscard.cardColor == "W") {
+	var colorPicker = new ColorPicker(topDiscard);
 }
