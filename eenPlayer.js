@@ -14,6 +14,8 @@ class Player extends PIXI.Sprite {
 
 		super(texturePlayerIcon);
 
+	    this.anchor.set(0.5);
+
 		this.playerName = playerName;
 		this.agg = agg;
 		this.sus = sus;
@@ -21,7 +23,17 @@ class Player extends PIXI.Sprite {
 		this.mem = mem;
 		this.enmityFor = enmityFor;
 
-		this.hand = new Hand(this.playerName);
+		this.hand = new Hand(this);
+
+		this.textObj = new PIXI.Text(this.playerName);
+		this.textObj.style = {fontSize: '12pt', fontFamily: 'sans-serif', fill: 0xffffff, stroke: 0x000000, strokeThickness: 4};
+		this.textObj.anchor.set(0.5);
+	}
+
+	displayName() {
+		this.textObj.x = this.x;
+		this.textObj.y = this.y + 33;
+		stage.addChild(this.textObj);
 	}
 
 	takeTurn() {

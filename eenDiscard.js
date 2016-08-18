@@ -9,10 +9,19 @@ class Discard {
 	    stage.addChild(this.pile);
 	}
 
+	positionDiscard() {
+	    for (var i = this.pile.children.length - 1; i >= 0; --i) {
+	    	var card = this.pile.getChildAt(i);
+		    card.x = (Math.floor(window.innerWidth / 2) + 60);
+		    card.y = Math.floor(window.innerHeight / 2);
+	    }
+	}
+
 	// plays a card into the Discard pile
 
 	playCard(card) {
 		card.loc = "Discard";
+	    card.scale.set(1.5);
 		card.setFaceUp(true);
 		var newX = Math.floor((window.innerWidth / 2) + 60);
 	    var newY = Math.floor(window.innerHeight / 2);
@@ -31,6 +40,10 @@ class Discard {
 // INSTANTIATE THE SINGLETON!
 
 var theDiscard = new Discard();
+
+window.addEventListener("resize", function(event) {
+    theDiscard.positionDiscard();
+}, false);
 
 // turn over the top card to start the game
 // this is a hack and should probably be handled elsewhere

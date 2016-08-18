@@ -4,9 +4,9 @@
 
 class Hand {
 
-	// playerName - the name of this hand's player to use as a location label for the cards
+	// player - the Player obj holding this Hand
 
-	constructor(playerName) {
+	constructor(player) {
 
 		// make a new Container to hold the cards and add it to the stage for rendering
 
@@ -16,7 +16,7 @@ class Hand {
 
 	    // store playerName in a property for access by other methods
 
-		this.playerName = playerName;
+		this.player = player;
 	}
 
 	// addCard adds a card to this hand
@@ -26,7 +26,9 @@ class Hand {
 
 		// set the location to this player's name
 
-		card.loc = this.playerName;
+		card.loc = this.player.playerName;
+
+	    card.scale.set(1);
 
 		// if the card belongs to the player, turn it face up
 
@@ -36,7 +38,7 @@ class Hand {
 
 		// position it at the end of the hand
 
-		var newX = 60 + (40 * this.cards.children.length);
+		var newX = 60 + (20 * this.cards.children.length);
 		var newY = 90;
 		card.moveCardTo(newX, newY);
 
@@ -50,7 +52,7 @@ class Hand {
 	reposCards() {
 		for (var i = this.cards.children.length - 1; i >= 0; i--) {
 			var card = this.cards.getChildAt(i);
-			var newX = 60 + (40 * i);
+			var newX = 60 + (20 * i);
 			var newY = 90;
 			card.moveCardTo(newX, newY);
 		}

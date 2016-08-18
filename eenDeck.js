@@ -11,6 +11,14 @@ class Deck {
 	    stage.addChild(this.cards);
 	}
 
+	positionDeck() {
+	    for (var i = this.cards.children.length - 1; i >= 0; --i) {
+	    	var card = this.cards.getChildAt(i);
+		    card.x = (Math.floor(window.innerWidth / 2) - 60);
+		    card.y = Math.floor(window.innerHeight / 2);
+	    }
+	}
+
 	// adds a card to the top of the deck
 
 	pushCard(card) {
@@ -70,6 +78,10 @@ class Deck {
 // INSTANTIATE THE SINGLETON!
 
 var theDeck = new Deck();
+
+window.addEventListener("resize", function(event) {
+    theDeck.positionDeck();
+}, false);
 
 // create the 216 individual cards in the full deck
 

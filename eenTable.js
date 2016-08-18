@@ -8,6 +8,22 @@ class Table {
 
 	constructor() {
 		this.players = new PIXI.Container();
+
+		// seating patterns based on number of players
+		// numbers are indexes into seats above
+
+		this.seatPatterns = [[1, 7],
+							 [1, 4, 10],
+							 [1, 4, 7, 10],
+							 [1, 4, 6, 8, 10],
+							 [1, 3, 5, 7, 9, 11],
+							 [1, 3, 5, 6, 8, 9, 11],
+							 [0, 2, 3, 5, 6, 8, 9, 11],
+							 [0, 2, 3, 5, 6, 7, 8, 9, 11],
+							 [0, 2, 3, 4, 5, 6, 8, 9, 10, 11],
+							 [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+							 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]];
+
 		this.addPlayer(player1);
 		this.addPlayer(player2);
 		this.addPlayer(player3);
@@ -82,13 +98,13 @@ class Table {
 
 		// some math to find coordinates and spacing
 
-		var left	= 40;
-		var center	= Math.floor(window.innerWidth / 2) - 20;
-		var right	= window.innerWidth - 80;
+		var left	= 60;
+		var center	= Math.floor(window.innerWidth / 2);
+		var right	= window.innerWidth - 60;
 
-		var top		= 40;
-		var middle	= Math.floor(window.innerHeight / 2) - 20;
-		var bottom	= window.innerHeight - 80;
+		var top		= 60;
+		var middle	= Math.floor(window.innerHeight / 2);
+		var bottom	= window.innerHeight - 60;
 
 		var horizSpacing = Math.floor(window.innerWidth / 6);
 		var vertSpacing = Math.floor(window.innerHeight / 6);
@@ -106,31 +122,17 @@ class Table {
 					 [left + horizSpacing, top],     [center, top],    [right - horizSpacing, top],
 					 [right, top + vertSpacing],     [right, middle],  [right, bottom - vertSpacing]];
 
-		// seating patterns based on number of players
-		// numbers are indexes into seats above
-
-		var seatPatterns = [[1, 7],
-							[1, 4, 10],
-							[1, 4, 7, 10],
-							[1, 4, 6, 8, 10],
-							[1, 3, 5, 7, 9, 11],
-							[1, 3, 5, 6, 8, 9, 11],
-							[0, 2, 3, 5, 6, 8, 9, 11],
-							[0, 2, 3, 5, 6, 7, 8, 9, 11],
-							[0, 2, 3, 4, 5, 6, 8, 9, 10, 11],
-							[0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-							[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]];
-
 		var seatingIndex = this.players.children.length - 2;
 
 		// seat each player
 
 		for (var i = this.players.children.length - 1; i >= 0; i--) {
 			var player = this.players.getChildAt(i);
-			player.seatNumber = seatPatterns[seatingIndex][i]
+			player.seatNumber = this.seatPatterns[seatingIndex][i]
 			player.x = seats[player.seatNumber][0];
 			this.adjustRowsWithTwoPlayers(seatingIndex, player, horizSpacing);
 			player.y = seats[player.seatNumber][1];
+			player.displayName();
 		};
 	}
 }
@@ -140,3 +142,7 @@ class Table {
 var theTable = new Table();
 
 theTable.positionPlayers();
+
+window.addEventListener("resize", function(event) {
+    theTable.positionPlayers();
+}, false);

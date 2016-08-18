@@ -5,16 +5,24 @@
 class Mover {
 
 	// card - the moving Card object
-	// deltaX - the amount to change the x value each frame
-	// deltaY - the amount to change the y value each frame
 	// newX - the final x value
 	// newY - the final y value
 
-	constructor(card, deltaX, deltaY, newX, newY) {
-		//this.player = theTable.currentPlayer;
-		this.moveCount = 5;
+	constructor(card, newX, newY) {
+
+		// moveCount will give us n+1 frames of movement
+
+		this.moveCount = 9;
+
 		this.card = card;
+
+		var dirX = newX - this.card.x;
+		var dirY = newY - this.card.y;
+		var deltaX = Math.floor(dirX / (this.moveCount + 1));
+		var deltaY = Math.floor(dirY / (this.moveCount + 1));
+
 		this.step = [deltaX, deltaY];
+
 		this.newX = newX;
 		this.newY = newY;
 	}
