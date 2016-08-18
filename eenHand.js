@@ -36,8 +36,13 @@ class Hand {
 
 		// position it at the end of the hand
 
-		var newX = 60 + (20 * this.cards.children.length);
-		var newY = 90;
+		var horizOffset = Math.floor(window.innerWidth / 6);
+		var newX = this.player.x - horizOffset;
+		if (this.player.seatNumber < 6) {
+			newX = this.player.x + 50;
+		}
+		newX += (20 * this.cards.children.length);
+		var newY = this.player.y;
 		card.moveCardTo(newX, newY, 1);
 
 		// put it in our cards property, a Container object
@@ -50,8 +55,13 @@ class Hand {
 	reposCards() {
 		for (var i = this.cards.children.length - 1; i >= 0; i--) {
 			var card = this.cards.getChildAt(i);
-			var newX = 60 + (20 * i);
-			var newY = 90;
+			var horizOffset = Math.floor(window.innerWidth / 6);
+			var newX = this.player.x - horizOffset;
+			if (this.player.seatNumber < 6) {
+				newX = this.player.x + 50;
+			}
+			newX += (20 * i);
+			var newY = this.player.y;
 			card.moveCardTo(newX, newY, 1);
 		}
 	}

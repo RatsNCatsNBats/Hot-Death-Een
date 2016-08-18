@@ -117,10 +117,10 @@ class Table {
 		//	3				11
 		//		2	1	0
 
-		var seats = [[right - horizSpacing, bottom], [center, bottom], [left + horizSpacing, bottom],
-					 [left, bottom - vertSpacing],   [left, middle],   [left, top + vertSpacing],
-					 [left + horizSpacing, top],     [center, top],    [right - horizSpacing, top],
-					 [right, top + vertSpacing],     [right, middle],  [right, bottom - vertSpacing]];
+		this.seats = [[right - horizSpacing, bottom], [center, bottom], [left + horizSpacing, bottom],
+					  [left, bottom - vertSpacing],   [left, middle],   [left, top + vertSpacing],
+					  [left + horizSpacing, top],     [center, top],    [right - horizSpacing, top],
+					  [right, top + vertSpacing],     [right, middle],  [right, bottom - vertSpacing]];
 
 		var seatingIndex = this.players.children.length - 2;
 
