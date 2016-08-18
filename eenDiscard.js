@@ -21,11 +21,10 @@ class Discard {
 
 	playCard(card) {
 		card.loc = "Discard";
-	    card.scale.set(1.5);
 		card.setFaceUp(true);
 		var newX = Math.floor((window.innerWidth / 2) + 60);
 	    var newY = Math.floor(window.innerHeight / 2);
-	    card.moveCardTo(newX, newY);
+	    card.moveCardTo(newX, newY, 1.5);
 	    this.pile.addChild(card);
 	    theTable.currentPlayer.hand.reposCards();
 	}

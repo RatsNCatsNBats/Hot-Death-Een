@@ -28,8 +28,6 @@ class Hand {
 
 		card.loc = this.player.playerName;
 
-	    card.scale.set(1);
-
 		// if the card belongs to the player, turn it face up
 
 		if (card.loc == "User") {
@@ -40,7 +38,7 @@ class Hand {
 
 		var newX = 60 + (20 * this.cards.children.length);
 		var newY = 90;
-		card.moveCardTo(newX, newY);
+		card.moveCardTo(newX, newY, 1);
 
 		// put it in our cards property, a Container object
 
@@ -54,7 +52,7 @@ class Hand {
 			var card = this.cards.getChildAt(i);
 			var newX = 60 + (20 * i);
 			var newY = 90;
-			card.moveCardTo(newX, newY);
+			card.moveCardTo(newX, newY, 1);
 		}
 	}
 

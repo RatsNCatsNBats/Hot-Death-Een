@@ -7,8 +7,9 @@ class Mover {
 	// card - the moving Card object
 	// newX - the final x value
 	// newY - the final y value
+	// newScale - the scale the card will be at the destination
 
-	constructor(card, newX, newY) {
+	constructor(card, newX, newY, newScale) {
 
 		// moveCount will give us n+1 frames of movement
 
@@ -21,10 +22,14 @@ class Mover {
 		var deltaX = Math.floor(dirX / (this.moveCount + 1));
 		var deltaY = Math.floor(dirY / (this.moveCount + 1));
 
-		this.step = [deltaX, deltaY];
+		var dirScale = newScale - this.card.scale.x;
+		var deltaScale = dirScale / (this.moveCount + 1);
+
+		this.step = [deltaX, deltaY, deltaScale];
 
 		this.newX = newX;
 		this.newY = newY;
+		this.newScale = newScale;
 	}
 
 	// moves the card one frame
@@ -34,10 +39,12 @@ class Mover {
 		if (this.moveCount) { // haven't reached final destination yet
 			this.card.x += this.step[0];
 			this.card.y += this.step[1];
+			this.card.scale.set(this.card.scale.x + this.step[2]);
 			this.moveCount--;
 		} else { // reached the end
 			this.card.x = this.newX;
 			this.card.y = this.newY;
+			this.card.scale.set(this.newScale);
 
 			// delete self from moving array
 			// Array.splice was acting funny so I did it this way

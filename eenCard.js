@@ -104,8 +104,8 @@ class Card extends PIXI.Sprite {
 
 	// animate moving to a new position
 
-	moveCardTo(newX, newY) {
-		var mover = new Mover(this, newX, newY);
+	moveCardTo(newX, newY, newScale) {
+		var mover = new Mover(this, newX, newY, newScale);
 		moving.push(mover);
 	}
 
