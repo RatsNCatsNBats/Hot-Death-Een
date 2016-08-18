@@ -29,7 +29,7 @@ class Deck {
 
 		// set the card's location to "Deck"
 
-		card.loc = "Deck";
+		card.loc = this;
 
 		// add it to this.cards
 

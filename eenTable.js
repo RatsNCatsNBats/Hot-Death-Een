@@ -129,9 +129,10 @@ class Table {
 		for (var i = this.players.children.length - 1; i >= 0; i--) {
 			var player = this.players.getChildAt(i);
 			player.seatNumber = this.seatPatterns[seatingIndex][i]
-			player.x = seats[player.seatNumber][0];
+			player.x = this.seats[player.seatNumber][0];
 			this.adjustRowsWithTwoPlayers(seatingIndex, player, horizSpacing);
-			player.y = seats[player.seatNumber][1];
+			player.y = this.seats[player.seatNumber][1];
+			player.hand.calcBounds();
 			player.displayName();
 		};
 	}

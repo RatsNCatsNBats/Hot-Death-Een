@@ -28,13 +28,13 @@ function onMouseUp() {
 
 		// do stuff based on the current location
 
-		if (this.loc == "Deck") {
+		if (this.loc == theDeck) {
 
 			// if it's in the deck add it to the player's hand
 
 			theTable.getPlayer().hand.addCard(this);
 
-		} else if (this.loc == "User") {
+		} else if (this.loc == player1.hand) {
 
 			// if it's in the player's hand see if it's a legal move and add it to the discard if so
 

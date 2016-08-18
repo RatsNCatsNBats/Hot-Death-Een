@@ -19,6 +19,51 @@ class Hand {
 		this.player = player;
 	}
 
+	calcBounds() {
+
+		var horizOffset = Math.floor(window.innerWidth / 6);
+
+		if (this.player.seatNumber == 0) {
+			this.leftBound = this.player.x + 50;
+			this.rightBound = window.innerWidth - 50;
+		}
+
+		if (this.player.seatNumber == 1) {
+			this.leftBound = this.player.x + 50;
+			this.rightBound = theTable.seats[0][0] - 50;
+		}
+
+		if (this.player.seatNumber == 2) {
+			this.leftBound = this.player.x + 50;
+			this.rightBound = theTable.seats[1][0] - 50;
+		}
+
+		if (this.player.seatNumber == 3 || this.player.seatNumber == 4 || this.player.seatNumber == 5) {
+			this.leftBound = this.player.x + 50;
+			this.rightBound = this.leftBound + horizOffset;
+		}
+
+		if (this.player.seatNumber == 6) {
+			this.leftBound = 50;
+			this.rightBound = this.player.x - 50;
+		}
+
+		if (this.player.seatNumber == 7) {
+			this.leftBound = theTable.seats[6][0] + 50;
+			this.rightBound = this.player.x - 50;
+		}
+
+		if (this.player.seatNumber == 8) {
+			this.leftBound = theTable.seats[7][0] + 50;
+			this.rightBound = this.player.x - 50;
+		}
+
+		if (this.player.seatNumber == 9 || this.player.seatNumber == 10 || this.player.seatNumber == 11) {
+			this.rightBound = this.player.x - 50;
+			this.leftBound = this.rightBound - horizOffset;
+		}
+	}
+
 	// addCard adds a card to this hand
 	//   card - the Card object to add
 
@@ -26,23 +71,23 @@ class Hand {
 
 		// set the location to this player's name
 
-		card.loc = this.player.playerName;
+		card.loc = this;
 
 		// if the card belongs to the player, turn it face up
 
-		if (card.loc == "User") {
+		if (card.loc == player1.hand) {
 			card.setFaceUp(true);
 		}
 
 		// position it at the end of the hand
 
-		var horizOffset = Math.floor(window.innerWidth / 6);
-		var newX = this.player.x - horizOffset;
-		if (this.player.seatNumber < 6) {
-			newX = this.player.x + 50;
+		var newX = this.leftBound + (20 * this.cards.children.length);
+		if (newX > this.rightBound) {
+			//this.handleOverflow();
+			newX = this.rightBound;
 		}
-		newX += (20 * this.cards.children.length);
 		var newY = this.player.y;
+
 		card.moveCardTo(newX, newY, 1);
 
 		// put it in our cards property, a Container object
@@ -55,13 +100,10 @@ class Hand {
 	reposCards() {
 		for (var i = this.cards.children.length - 1; i >= 0; i--) {
 			var card = this.cards.getChildAt(i);
-			var horizOffset = Math.floor(window.innerWidth / 6);
-			var newX = this.player.x - horizOffset;
-			if (this.player.seatNumber < 6) {
-				newX = this.player.x + 50;
-			}
-			newX += (20 * i);
+
+			var newX = this.leftBound + (20 * i);
 			var newY = this.player.y;
+
 			card.moveCardTo(newX, newY, 1);
 		}
 	}
