@@ -11,6 +11,8 @@ class Hand {
 		// make a new Container to hold the cards and add it to the stage for rendering
 
 		this.cards = new PIXI.Container();
+		this.leftOverflow = false;
+		this.rightOverflow = false;
 
 	    stage.addChild(this.cards);
 
@@ -64,6 +66,15 @@ class Hand {
 		}
 	}
 
+	moveToEnd() {
+		var card = this.cards.getChildAt(this.cards.children.length - 1);
+		var virtualEnd = this.leftBound + card.handPosition;
+		this.viewOffset = virtualEnd - this.rightBound;
+		if (this.viewOffset > 0) {
+			this.viewOffset = 0;
+		}
+	}
+
 	// addCard adds a card to this hand
 	//   card - the Card object to add
 
@@ -82,10 +93,33 @@ class Hand {
 		// position it at the end of the hand
 
 		var newX = this.leftBound + (20 * this.cards.children.length);
+
 		if (newX > this.rightBound) {
-			//this.handleOverflow();
+
+			this.moveToEnd();
+
+			if (this.leftOverflow == false) {
+				this.leftOverflow = true;
+			}
+
+			for (var i = this.cards.children.length - 1; i >= 0; i--) {
+
+				var card = this.cards.getChildAt(i);
+
+				var myNewX = card.handPosition - 20;
+
+				if (myNewX < this.leftBound) {
+					myNewX = this.leftBound;
+				}
+
+				if (myNewX != card.x) {
+					card.moveCardTo(myNewX, card.y, 1);
+				}
+			}
+
 			newX = this.rightBound;
 		}
+
 		var newY = this.player.y;
 
 		card.moveCardTo(newX, newY, 1);
@@ -98,13 +132,43 @@ class Hand {
 	// reposCards repositions to fix holes left by playing a card
 
 	reposCards() {
+
 		for (var i = this.cards.children.length - 1; i >= 0; i--) {
+
 			var card = this.cards.getChildAt(i);
 
 			var newX = this.leftBound + (20 * i);
 			var newY = this.player.y;
 
 			card.moveCardTo(newX, newY, 1);
+		}
+	}
+
+	drawHand() {
+
+		if (this.leftOverflow) {
+			// activate left mask sprite
+		}
+
+		if (this.rightOverflow) {
+			// activate right mask sprite
+		}
+
+		for (var i = this.cards.children.length - 1; i >= 0; i--) {
+
+			var card = this.cards.getChildAt(i);
+
+			var newX = this.leftBound + card.handPosition + this.viewOffset;
+
+			if (newX < this.leftBound) {
+				newX = this.leftBound;
+			}
+
+			if (newX > this.rightBound) {
+				newX = this.rightBound
+			}
+
+			card.x = newX;
 		}
 	}
 
