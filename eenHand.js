@@ -11,10 +11,15 @@ class Hand {
 		// make a new Container to hold the cards and add it to the stage for rendering
 
 		this.cards = new PIXI.Container();
-		this.leftOverflow = false;
-		this.rightOverflow = false;
+		this.viewOffset = 0;
+		this.handMaskLeft = new HandMask(this, 1);
+		this.handMaskLeft.visible = false;
+		this.handMaskRight = new HandMask(this, -1);
+		this.handMaskRight.visible = false;
 
 	    stage.addChild(this.cards);
+	    stage.addChild(this.handMaskLeft);
+	    stage.addChild(this.handMaskRight);
 
 	    // store playerName in a property for access by other methods
 
@@ -64,14 +69,41 @@ class Hand {
 			this.rightBound = this.player.x - 50;
 			this.leftBound = this.rightBound - horizOffset;
 		}
+
+		this.handMaskLeft.x = this.leftBound + 20;
+		this.handMaskLeft.y = this.player.y;
+
+		this.handMaskRight.x = this.rightBound - 20;
+		this.handMaskRight.y = this.player.y;
 	}
 
 	moveToEnd() {
+
 		var card = this.cards.getChildAt(this.cards.children.length - 1);
+
 		var virtualEnd = this.leftBound + card.handPosition;
+
 		this.viewOffset = virtualEnd - this.rightBound;
+
 		if (this.viewOffset > 0) {
 			this.viewOffset = 0;
+		}
+	}
+
+	shiftCards() {
+
+		for (var i = this.cards.children.length - 1; i >= 0; i--) {
+
+			var card = this.cards.getChildAt(i);
+			var newX = card.x - 20;
+
+			if (newX < this.leftBound) {
+				newX = this.leftBound;
+			}
+
+			if (newX != card.x) {
+				card.moveCardTo(newX, card.y, 1);
+			}
 		}
 	}
 
@@ -92,31 +124,16 @@ class Hand {
 
 		// position it at the end of the hand
 
-		var newX = this.leftBound + (20 * this.cards.children.length);
+		card.handPosition = 20 * this.cards.children.length;
+
+		var newX = this.leftBound + card.handPosition;
 
 		if (newX > this.rightBound) {
-
+			this.rightEndOffset = this.rightBound - newX;
 			this.moveToEnd();
-
-			if (this.leftOverflow == false) {
-				this.leftOverflow = true;
-			}
-
-			for (var i = this.cards.children.length - 1; i >= 0; i--) {
-
-				var card = this.cards.getChildAt(i);
-
-				var myNewX = card.handPosition - 20;
-
-				if (myNewX < this.leftBound) {
-					myNewX = this.leftBound;
-				}
-
-				if (myNewX != card.x) {
-					card.moveCardTo(myNewX, card.y, 1);
-				}
-			}
-
+			this.viewOffset -= 20;
+			this.shiftCards();
+			this.handMaskLeft.visible = true;
 			newX = this.rightBound;
 		}
 
@@ -126,7 +143,8 @@ class Hand {
 
 		// put it in our cards property, a Container object
 
-		this.cards.addChild(card);
+		card.addingToHand = this;
+		//this.cards.addChild(card);
 	}
 
 	// reposCards repositions to fix holes left by playing a card
@@ -137,36 +155,69 @@ class Hand {
 
 			var card = this.cards.getChildAt(i);
 
-			var newX = this.leftBound + (20 * i);
-			var newY = this.player.y;
-
-			card.moveCardTo(newX, newY, 1);
-		}
-	}
-
-	drawHand() {
-
-		if (this.leftOverflow) {
-			// activate left mask sprite
-		}
-
-		if (this.rightOverflow) {
-			// activate right mask sprite
-		}
-
-		for (var i = this.cards.children.length - 1; i >= 0; i--) {
-
-			var card = this.cards.getChildAt(i);
+			card.handPosition = 20 * i;
 
 			var newX = this.leftBound + card.handPosition + this.viewOffset;
 
 			if (newX < this.leftBound) {
 				newX = this.leftBound;
+				this.handMaskLeft.visible = true;
+			}
+
+			if (newX > this.rightBound) {
+				newX = this.rightBound;
+				this.handMaskRight.visible = true;
+			}
+
+			if (newX != card.x) {
+				card.moveCardTo(newX, card.y, 1);
+			}
+		}
+	}
+
+	isCardMoving(card) {
+
+		//console.log("moving.length: " + moving.length);
+
+		for (var i = moving.length - 1; i >= 0; i--) {
+
+			if (card == moving[i].card) {
+				//console.log(card.cardName + " is moving");
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	drawHand() {
+
+		//console.log(this.player.playerName + "'s hand drawHand()");
+
+		for (var i = this.cards.children.length - 1; i >= 0; i--) {
+
+			var card = this.cards.getChildAt(i);
+
+			if (this.isCardMoving(card)) {
+				continue;
+			}
+
+			//console.log("card: " + card.cardName);
+			//console.log("this.leftBound: " + this.leftBound + " card.handPosition: " + card.handPosition + " this.viewOffset: " + this.viewOffset);
+
+			var newX = this.leftBound + card.handPosition + this.viewOffset;
+
+			if (newX < this.leftBound) {
+				newX = this.leftBound;
+				this.handMaskLeft.visible = true;
 			}
 
 			if (newX > this.rightBound) {
 				newX = this.rightBound
+				this.handMaskRight.visible = true;
 			}
+
+			//console.log("newX: " + newX);
 
 			card.x = newX;
 		}

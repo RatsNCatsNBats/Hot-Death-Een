@@ -109,3 +109,8 @@ var textureSixtyNine =					PIXI.Texture.fromImage('_assets/080SixtyNine.png');
 var textureCardBack =					PIXI.Texture.fromImage('_assets/081CardBack.png');
 
 var texturePlayerIcon =					PIXI.Texture.fromImage('_assets/PlayerIcon.png');
+
+var textureHandMaskLeft =				PIXI.Texture.fromImage('_assets/handMaskLeft.png');
+var textureHandMaskLeftDim =			PIXI.Texture.fromImage('_assets/handMaskLeftDim.png');
+var textureHandMaskRight =				PIXI.Texture.fromImage('_assets/handMaskRight.png');
+var textureHandMaskRightDim =			PIXI.Texture.fromImage('_assets/handMaskRightDim.png');

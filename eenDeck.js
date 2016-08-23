@@ -52,7 +52,7 @@ class Deck {
 	        var y = this.cards.getChildAt(j);
 	        this.cards.swapChildren(x, y);
 	    }
-	    //this.moveToTop("Red Nine");
+	    //this.moveToTop("Hot Death");
 	    //this.moveToTop("Yellow Nine");
 	    //this.moveToTop("Green Six");
 	    //this.moveToTop("Red Six");

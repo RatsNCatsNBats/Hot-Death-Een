@@ -45,6 +45,10 @@ class Mover {
 			this.card.x = this.newX;
 			this.card.y = this.newY;
 			this.card.scale.set(this.newScale);
+			if (this.card.addingToHand != null) {
+				this.card.addingToHand.cards.addChild(this.card);
+				this.card.addingToHand = null;
+			}
 
 			// delete self from moving array
 			// Array.splice was acting funny so I did it this way

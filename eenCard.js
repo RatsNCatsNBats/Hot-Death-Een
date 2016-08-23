@@ -1,58 +1,4 @@
 
-// function to see if two timestamps are within an interval of each other
-
-function isWithinInterval(t1, t2) {
-	var doubleClickInterval = 250;
-	var bool = (Math.abs(t1 - t2) < doubleClickInterval);
-	return bool;
-}
-
-// event callback for clicks
-
-function onMouseUp() {
-
-	// if we're modal ignore any clicks
-
-	if (isModal) {
-		return;
-	}
-
-	// get a current timestamp
-
-	var d = new Date();
-	var timestamp = d.getTime();
-
-	// is this the second click of a doubleclick?
-
-	if (this.timestamp && isWithinInterval(this.timestamp, timestamp)) {
-
-		// do stuff based on the current location
-
-		if (this.loc == theDeck) {
-
-			// if it's in the deck add it to the player's hand
-
-			theTable.getPlayer().hand.addCard(this);
-
-		} else if (this.loc == player1.hand) {
-
-			// if it's in the player's hand see if it's a legal move and add it to the discard if so
-
-			if (this.isLegalMove()) {
-
-				// if it's a wild card have the player pick a color
-
-				if (this.cardColor == "W") {
-					var colorPicker = new ColorPicker(this);
-				}
-
-				theDiscard.playCard(this);
-			}
-		}
-	}
-	this.timestamp = timestamp;
-}
-
 // class for the individual cards
 // does all the heavy lifting wrt rules and such
 
@@ -96,10 +42,66 @@ class Card extends PIXI.Sprite {
 	    // setup event callbacks
 
 	    this
-	        .on('mouseup', onMouseUp)
-	        .on('mouseupoutside', onMouseUp)
-	        .on('touchend', onMouseUp)
-	        .on('touchendoutside', onMouseUp);
+	        .on('mouseup', this.onMouseUp)
+	        .on('mouseupoutside', this.onMouseUp)
+	        .on('touchend', this.onMouseUp)
+	        .on('touchendoutside', this.onMouseUp);
+	}
+
+	// function to see if two timestamps are within an interval of each other
+
+	isWithinInterval(t1, t2) {
+		var doubleClickInterval = 250;
+		var bool = (Math.abs(t1 - t2) < doubleClickInterval);
+		return bool;
+	}
+
+	// event callback for clicks
+
+	onMouseUp() {
+
+		//console.log(this.cardName + "'s onMouseUp()");
+
+		// if we're modal ignore any clicks
+
+		if (isModal) {
+			return;
+		}
+
+		// get a current timestamp
+
+		var d = new Date();
+		var timestamp = d.getTime();
+
+		// is this the second click of a doubleclick?
+
+		if (this.timestamp && this.isWithinInterval(this.timestamp, timestamp)) {
+
+			// do stuff based on the current location
+
+			if (this.loc == theDeck) {
+
+				// if it's in the deck add it to the player's hand
+
+				theTable.getPlayer().hand.addCard(this);
+
+			} else if (this.loc == player1.hand) {
+
+				// if it's in the player's hand see if it's a legal move and add it to the discard if so
+
+				if (this.isLegalMove()) {
+
+					// if it's a wild card have the player pick a color
+
+					if (this.cardColor == "W") {
+						var colorPicker = new ColorPicker(this);
+					}
+
+					theDiscard.playCard(this);
+				}
+			}
+		}
+		this.timestamp = timestamp;
 	}
 
 	// animate moving to a new position

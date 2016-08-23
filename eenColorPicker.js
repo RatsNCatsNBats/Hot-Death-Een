@@ -36,7 +36,7 @@ class ColorPicker {
 
 		this.promptText = new PIXI.Text('  choose a color  ');
 
-		this.promptText.style = {fontStyle: 'italic', fontSize: '36pt', fontFamily: 'sans-serif', fill: 0xffffff, stroke: 0x000000, strokeThickness: 1, dropShadow: true};
+		this.promptText.style = {fontStyle: 'italic', fontSize: '36pt', fontFamily: 'sans-serif', fill: 0xffffff, stroke: 0x000000, strokeThickness: 3, dropShadow: true};
 		this.promptText.anchor.set(0.5);
 		this.promptText.x = middleX;
 		this.promptText.y = middleY;

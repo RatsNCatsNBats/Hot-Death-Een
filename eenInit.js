@@ -8,6 +8,10 @@ var isModal = false;
 
 var moving = [];
 
+// used by HandMasks to communicate with the main loop
+
+var overHandMask = null;
+
 // Create the renderer
 
 var renderer = PIXI.autoDetectRenderer(800, 600);
