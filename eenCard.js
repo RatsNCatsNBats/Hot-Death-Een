@@ -111,6 +111,20 @@ class Card extends PIXI.Sprite {
 		moving.push(mover);
 	}
 
+	// returns true if this Card is currently in the moving array
+
+	isMoving() {
+
+		for (var i = moving.length - 1; i >= 0; i--) {
+
+			if (this == moving[i].card) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	// call this to use the blue version of a wild card's image
 
 	setWildFaceTextureBlue() {

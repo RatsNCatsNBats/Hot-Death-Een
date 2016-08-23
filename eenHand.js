@@ -175,21 +175,6 @@ class Hand {
 		}
 	}
 
-	isCardMoving(card) {
-
-		//console.log("moving.length: " + moving.length);
-
-		for (var i = moving.length - 1; i >= 0; i--) {
-
-			if (card == moving[i].card) {
-				//console.log(card.cardName + " is moving");
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	drawHand() {
 
 		//console.log(this.player.playerName + "'s hand drawHand()");
@@ -198,7 +183,7 @@ class Hand {
 
 			var card = this.cards.getChildAt(i);
 
-			if (this.isCardMoving(card)) {
+			if (card.isMoving()) {
 				continue;
 			}
 
