@@ -208,6 +208,8 @@ class Hand {
 
 			card.x = newX;
 			card.y = card.big ? this.player.y - 15 : this.player.y;
+			var scale = card.big ? 1.5 : 1;
+			card.scale.set(scale);
 		}
 
 		if (this.cards.children.length) {
