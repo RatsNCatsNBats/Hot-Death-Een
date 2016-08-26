@@ -88,6 +88,8 @@ class Hand {
 		if (this.viewOffset > 0) {
 			this.viewOffset = 0;
 		}
+
+		this.handMaskRight.visible = false;
 	}
 
 	shiftCards() {
