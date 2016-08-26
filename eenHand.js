@@ -81,9 +81,9 @@ class Hand {
 
 		var card = this.cards.getChildAt(this.cards.children.length - 1);
 
-		var virtualEnd = this.leftBound + card.handPosition;
+		var rightEnd = this.leftBound + card.handPosition;
 
-		this.viewOffset = virtualEnd - this.rightBound;
+		this.viewOffset = this.rightBound - rightEnd;
 
 		if (this.viewOffset > 0) {
 			this.viewOffset = 0;
@@ -205,6 +205,19 @@ class Hand {
 			//console.log("newX: " + newX);
 
 			card.x = newX;
+		}
+
+		if (this.cards.children.length) {
+
+			var card = this.cards.getChildAt(this.cards.children.length - 1);
+			var rightEnd = this.leftBound + card.handPosition;
+
+			if (rightEnd > this.rightBound) {
+				this.rightEndOffset = this.rightBound - rightEnd;
+			} else {
+				this.rightEndOffset = 0;
+				this.handMaskRight.visible = false;
+			}
 		}
 	}
 

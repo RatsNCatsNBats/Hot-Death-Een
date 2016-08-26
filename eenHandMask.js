@@ -49,6 +49,13 @@ class HandMask extends PIXI.Sprite {
 
 	onMouseOut() {
 
+		// this check is needed because this handler is getting called when a control changes to visible
+		// and we're using a freaking global variable to communicate with the game loop
+
+		if (this != overHandMask) {
+			return;
+		}
+
 		overHandMask = null;
 
 		if (this.direction == 1) { // left

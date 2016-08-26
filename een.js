@@ -14,8 +14,6 @@ function update() {
 		}
 	}
 
-	console.log("overHandMask: " + overHandMask);
-
 	if (overHandMask) {
 
 		overHandMask.hand.viewOffset += overHandMask.direction;
