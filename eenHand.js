@@ -207,6 +207,7 @@ class Hand {
 			//console.log("newX: " + newX);
 
 			card.x = newX;
+			card.y = card.big ? this.player.y - 15 : this.player.y;
 		}
 
 		if (this.cards.children.length) {

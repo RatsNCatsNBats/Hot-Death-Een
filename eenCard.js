@@ -22,6 +22,7 @@ class Card extends PIXI.Sprite {
 		this.cardColor = cardColor;
 		this.cardGlyph = cardGlyph;
 		this.faceUp = false;
+		this.big = false;
 
 	    // enable interactivity
 
@@ -42,6 +43,8 @@ class Card extends PIXI.Sprite {
 	    // setup event callbacks
 
 	    this
+	    	.on('mouseover', this.onMouseOver)
+	    	.on('mouseout', this.onMouseOut)
 	        .on('mouseup', this.onMouseUp)
 	        .on('mouseupoutside', this.onMouseUp)
 	        .on('touchend', this.onMouseUp)
@@ -54,6 +57,22 @@ class Card extends PIXI.Sprite {
 		var doubleClickInterval = 250;
 		var bool = (Math.abs(t1 - t2) < doubleClickInterval);
 		return bool;
+	}
+
+	onMouseOver() {
+
+		if (this.loc == player1.hand) {
+			this.big = true;
+			this.moveCardTo(this.x, this.y - 15, 1.5);
+		}
+	}
+
+	onMouseOut() {
+
+		if (this.loc == player1.hand) {
+			this.big = false;
+			this.moveCardTo(this.x, this.y + 15, 1);
+		}
 	}
 
 	// event callback for clicks
