@@ -25,31 +25,31 @@ class Card extends PIXI.Sprite {
 		this.faceUp = false;
 		this.big = false;
 
-	    // enable interactivity
+		// enable interactivity
 
-	    this.interactive = true;
+		this.interactive = true;
 
-	    // enable hand cursor above cards
+		// enable hand cursor above cards
 
-	    this.buttonMode = true;
+		this.buttonMode = true;
 
-	    // center the anchor point
+		// center the anchor point
 
-	    this.anchor.set(0.5);
+		this.anchor.set(0.5);
 
-	    // scale the card image up a bit
+		// scale the card image up a bit
 
-	    this.scale.set(1.5);
+		this.scale.set(1.5);
 
-	    // setup event callbacks
+		// setup event callbacks
 
-	    this
-	    	.on('mouseover', this.onMouseOver)
-	    	.on('mouseout', this.onMouseOut)
-	        .on('mouseup', this.onMouseUp)
-	        .on('mouseupoutside', this.onMouseUp)
-	        .on('touchend', this.onMouseUp)
-	        .on('touchendoutside', this.onMouseUp);
+		this
+			.on('mouseover', this.onMouseOver)
+			.on('mouseout', this.onMouseOut)
+			.on('mouseup', this.onMouseUp)
+			.on('mouseupoutside', this.onMouseUp)
+			.on('touchend', this.onMouseUp)
+			.on('touchendoutside', this.onMouseUp);
 	}
 
 	// function to see if two timestamps are within an interval of each other

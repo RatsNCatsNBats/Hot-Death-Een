@@ -32,7 +32,7 @@ renderer.resize(window.innerWidth, window.innerHeight);
 // make sure when the window gets resized, the renderer is as well
 
 window.addEventListener("resize", function(event) {
-    renderer.resize(window.innerWidth, window.innerHeight);
+	renderer.resize(window.innerWidth, window.innerHeight);
 }, false);
 
 // Add the canvas to the HTML document

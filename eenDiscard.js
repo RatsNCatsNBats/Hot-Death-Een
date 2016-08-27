@@ -6,15 +6,15 @@ class Discard {
 
 	constructor() {
 		this.pile = new PIXI.Container();
-	    stage.addChild(this.pile);
+		stage.addChild(this.pile);
 	}
 
 	positionDiscard() {
-	    for (var i = this.pile.children.length - 1; i >= 0; --i) {
-	    	var card = this.pile.getChildAt(i);
-		    card.x = (Math.floor(window.innerWidth / 2) + 60);
-		    card.y = Math.floor(window.innerHeight / 2);
-	    }
+		for (var i = this.pile.children.length - 1; i >= 0; --i) {
+			var card = this.pile.getChildAt(i);
+			card.x = (Math.floor(window.innerWidth / 2) + 60);
+			card.y = Math.floor(window.innerHeight / 2);
+		}
 	}
 
 	// plays a card into the Discard pile
@@ -24,10 +24,10 @@ class Discard {
 		card.loc = this;
 		card.setFaceUp(true);
 		var newX = Math.floor((window.innerWidth / 2) + 60);
-	    var newY = Math.floor(window.innerHeight / 2);
-	    card.moveCardTo(newX, newY, 1.5);
-	    this.pile.addChild(card);
-	    theTable.currentPlayer.hand.reposCards();
+		var newY = Math.floor(window.innerHeight / 2);
+		card.moveCardTo(newX, newY, 1.5);
+		this.pile.addChild(card);
+		theTable.currentPlayer.hand.reposCards();
 	}
 
 	// returns the Card object on top of the pile
@@ -42,7 +42,7 @@ class Discard {
 var theDiscard = new Discard();
 
 window.addEventListener("resize", function(event) {
-    theDiscard.positionDiscard();
+	theDiscard.positionDiscard();
 }, false);
 
 // turn over the top card to start the game

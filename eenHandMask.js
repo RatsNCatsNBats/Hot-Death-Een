@@ -17,21 +17,21 @@ class HandMask extends PIXI.Sprite {
 		this.hand = hand;
 		this.direction = direction;
 
-	    // enable interactivity
+		// enable interactivity
 
-	    this.interactive = true;
+		this.interactive = true;
 
-	    // enable hand cursor on mouseover
+		// enable hand cursor on mouseover
 
-	    this.buttonMode = true;
+		this.buttonMode = true;
 
-	    // center the anchor point
+		// center the anchor point
 
-	    this.anchor.set(0.5);
+		this.anchor.set(0.5);
 
-	    this
-	        .on('mouseover', this.onMouseOver)
-	        .on('mouseout', this.onMouseOut);
+		this
+			.on('mouseover', this.onMouseOver)
+			.on('mouseout', this.onMouseOut);
 	}
 
 	onMouseOver() {

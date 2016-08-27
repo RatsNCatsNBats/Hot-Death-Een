@@ -7,9 +7,9 @@ class ToolTip extends PIXI.Sprite {
 
 		this.visible = false;
 
-	    this.anchor.set(0.5);
+		this.anchor.set(0.5);
 
-	    this.scale.set(1.1);
+		this.scale.set(1.1);
 
 		stage.addChild(this);
 	}

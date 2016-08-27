@@ -17,11 +17,11 @@ class Hand {
 		this.handMaskRight = new HandMask(this, -1);
 		this.handMaskRight.visible = false;
 
-	    stage.addChild(this.cards);
-	    stage.addChild(this.handMaskLeft);
-	    stage.addChild(this.handMaskRight);
+		stage.addChild(this.cards);
+		stage.addChild(this.handMaskLeft);
+		stage.addChild(this.handMaskRight);
 
-	    // store playerName in a property for access by other methods
+		// store playerName in a property for access by other methods
 
 		this.player = player;
 	}

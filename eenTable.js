@@ -39,7 +39,7 @@ class Table {
 		this.playDirection = 1; // 1 for clockwise, -1 for widdershins
 		this.currentPlayerIndex = 0;
 		this.currentPlayer = player1;
-	    stage.addChild(this.players);
+		stage.addChild(this.players);
 	}
 
 	// adds a player to the table
@@ -145,5 +145,5 @@ var theTable = new Table();
 theTable.positionPlayers();
 
 window.addEventListener("resize", function(event) {
-    theTable.positionPlayers();
+	theTable.positionPlayers();
 }, false);

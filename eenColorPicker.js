@@ -84,13 +84,13 @@ class ColorPicker {
 
 		// make it interactive and use a hand cursor over it
 
-	    square.interactive = true;
-	    square.buttonMode = true;
+		square.interactive = true;
+		square.buttonMode = true;
 
-	    // store a closure variable for the event callback to have a handle to the ColorPicker object
-	    // also using the parameter cardColor in this way
+		// store a closure variable for the event callback to have a handle to the ColorPicker object
+		// also using the parameter cardColor in this way
 
-	    var colorPicker = this;
+		var colorPicker = this;
 
 		square.click = function (e) {
 

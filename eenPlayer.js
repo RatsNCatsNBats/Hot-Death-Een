@@ -14,7 +14,7 @@ class Player extends PIXI.Sprite {
 
 		super(texturePlayerIcon);
 
-	    this.anchor.set(0.5);
+		this.anchor.set(0.5);
 
 		this.playerName = playerName;
 		this.agg = agg;

@@ -41,6 +41,6 @@ function update() {
 		player.hand.drawHand();
 	}
 
-    requestAnimationFrame(update);
-    renderer.render(stage);
+	requestAnimationFrame(update);
+	renderer.render(stage);
 }
