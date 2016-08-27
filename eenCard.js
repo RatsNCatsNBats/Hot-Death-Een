@@ -63,11 +63,16 @@ class Card extends PIXI.Sprite {
 	onMouseOver() {
 
 		if (this.loc == player1.hand) {
+
 			this.big = true;
+
 			this.moveCardTo(this.x, player1.y - 16, 1.5);
+
 			this.cardToolTip.x = this.x;
 			this.cardToolTip.y = this.y - Math.floor(this.cardToolTip.height / 2) - 75;
+
 			stage.addChild(this.cardToolTip);
+
 			this.cardToolTip.visible = true;
 		}
 	}
@@ -75,8 +80,13 @@ class Card extends PIXI.Sprite {
 	onMouseOut() {
 
 		if (this.loc == player1.hand) {
-			this.cardToolTip.visible = false;
+
+			if (this.x == this.cardToolTip.x) {
+				this.cardToolTip.visible = false;
+			}
+
 			this.big = false;
+
 			this.moveCardTo(this.x, player1.y, 1);
 		}
 	}
