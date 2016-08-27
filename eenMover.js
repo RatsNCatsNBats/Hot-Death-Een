@@ -36,17 +36,27 @@ class Mover {
 	// called by update()
 
 	move(index) {
+
 		if (this.moveCount) { // haven't reached final destination yet
+
 			this.card.x += this.step[0];
 			this.card.y += this.step[1];
+
 			this.card.scale.set(this.card.scale.x + this.step[2]);
+
 			this.moveCount--;
+
 		} else { // reached the end
+
 			this.card.x = this.newX;
 			this.card.y = this.newY;
+
 			this.card.scale.set(this.newScale);
+
 			if (this.card.addingToHand != null) {
+
 				this.card.addingToHand.cards.addChild(this.card);
+
 				this.card.addingToHand = null;
 			}
 
@@ -54,15 +64,24 @@ class Mover {
 			// Array.splice was acting funny so I did it this way
 
 			if (moving.length == 1) {
+
 				moving = [];
+
 			} else {
+
 				if (index == 0) {
+
 					moving = moving.slice(1, moving.length);
+
 				} else if (index == moving.length - 1) {
+
 					moving = moving.slice(0, index);
+
 				} else {
+
 					var left = moving.slice(0, index);
 					var right = moving.slice(index + 1, moving.length);
+
 					moving = left.concat(right);
 				}
 			}

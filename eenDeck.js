@@ -8,13 +8,17 @@ class Deck {
 		// make a PIXI Contatiner to hols the Card objects and add it to the stage
 
 		this.cards = new PIXI.Container();
+
 		stage.addChild(this.cards);
 	}
 
 	positionDeck() {
+
 		for (var i = this.cards.children.length - 1; i >= 0; --i) {
+
 			var card = this.cards.getChildAt(i);
-			card.x = (Math.floor(window.innerWidth / 2) - 60);
+
+			card.x = Math.floor(window.innerWidth / 2) - 60;
 			card.y = Math.floor(window.innerHeight / 2);
 		}
 	}
@@ -37,7 +41,7 @@ class Deck {
 
 		// position the card
 
-		card.x = (Math.floor(window.innerWidth / 2) - 60);
+		card.x = Math.floor(window.innerWidth / 2) - 60;
 		card.y = Math.floor(window.innerHeight / 2);
 		//card.moveCardTo(newX, newY);
 	}
@@ -47,9 +51,12 @@ class Deck {
 
 	shuffle() {
 		for (var i = this.cards.children.length; i; --i) {
+
 			var j = Math.floor(Math.random() * i);
+
 			var x = this.cards.getChildAt(i - 1);
 			var y = this.cards.getChildAt(j);
+
 			this.cards.swapChildren(x, y);
 		}
 		//this.moveToTop("Hot Death");
@@ -65,10 +72,15 @@ class Deck {
 	moveToTop(cardName) {
 
 		for (var i = this.cards.children.length - 1; i >= 0; i--) {
+
 			var kid = this.cards.getChildAt(i);
+
 			if (kid.cardName == cardName) {
+
 				this.cards.removeChild(kid);
+
 				this.pushCard(kid);
+
 				return;
 			}
 		}
