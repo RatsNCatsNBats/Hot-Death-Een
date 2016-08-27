@@ -63,7 +63,7 @@ class Card extends PIXI.Sprite {
 
 		if (this.loc == player1.hand) {
 			this.big = true;
-			this.moveCardTo(this.x, player1.y - 15, 1.5);
+			this.moveCardTo(this.x, player1.y - 16, 1.5);
 		}
 	}
 
