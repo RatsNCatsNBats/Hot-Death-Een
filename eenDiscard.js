@@ -20,6 +20,7 @@ class Discard {
 	// plays a card into the Discard pile
 
 	playCard(card) {
+		card.cardToolTip.visible = false;
 		card.loc = this;
 		card.setFaceUp(true);
 		var newX = Math.floor((window.innerWidth / 2) + 60);
