@@ -1,4 +1,6 @@
 
+// rules tooltips for cards
+
 class ToolTip extends PIXI.Sprite {
 
 	constructor(texture) {

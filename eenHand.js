@@ -8,23 +8,33 @@ class Hand {
 
 	constructor(player) {
 
-		// make a new Container to hold the cards and add it to the stage for rendering
+		// make a new Container to hold the cards
 
 		this.cards = new PIXI.Container();
+
+		// viewOffset is the scroll posistion for the hand
+
 		this.viewOffset = 0;
+
+		// HandMask controls for scrolling
+
 		this.handMaskLeft = new HandMask(this, 1);
 		this.handMaskLeft.visible = false;
 		this.handMaskRight = new HandMask(this, -1);
 		this.handMaskRight.visible = false;
 
+		// add cards and HandMasks to the stage for rendering
+
 		stage.addChild(this.cards);
 		stage.addChild(this.handMaskLeft);
 		stage.addChild(this.handMaskRight);
 
-		// store playerName in a property for access by other methods
+		// store Player object in a property for access by other methods
 
 		this.player = player;
 	}
+
+	// calcBounds calculates the leftBound and rightBound x values for this hand
 
 	calcBounds() {
 
@@ -70,12 +80,16 @@ class Hand {
 			this.leftBound = this.rightBound - horizOffset;
 		}
 
+		// position the HandMasks
+
 		this.handMaskLeft.x = this.leftBound + 20;
 		this.handMaskLeft.y = this.player.y;
 
 		this.handMaskRight.x = this.rightBound - 20;
 		this.handMaskRight.y = this.player.y;
 	}
+
+	// moveToEnd scrolls the hand all the way to the right end
 
 	moveToEnd() {
 
@@ -91,6 +105,8 @@ class Hand {
 
 		this.handMaskRight.visible = false;
 	}
+
+	// shiftCards creates move animations to shift visible cards to the left
 
 	shiftCards() {
 
@@ -149,7 +165,7 @@ class Hand {
 		//this.cards.addChild(card);
 	}
 
-	// reposCards repositions to fix holes left by playing a card
+	// reposCards repositions cards to fix holes left by playing a card
 
 	reposCards() {
 
