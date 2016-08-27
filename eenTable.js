@@ -26,16 +26,16 @@ class Table {
 
 		this.addPlayer(player1);
 		this.addPlayer(player2);
-		this.addPlayer(player3);
-		this.addPlayer(player4);
-		this.addPlayer(player5);
-		this.addPlayer(player6);
-		this.addPlayer(player7);
-		this.addPlayer(player8);
-		this.addPlayer(player9);
-		this.addPlayer(player10);
-		this.addPlayer(player11);
-		this.addPlayer(player12);
+		//this.addPlayer(player3);
+		//this.addPlayer(player4);
+		//this.addPlayer(player5);
+		//this.addPlayer(player6);
+		//this.addPlayer(player7);
+		//this.addPlayer(player8);
+		//this.addPlayer(player9);
+		//this.addPlayer(player10);
+		//this.addPlayer(player11);
+		//this.addPlayer(player12);
 		this.playDirection = 1; // 1 for clockwise, -1 for widdershins
 		this.currentPlayerIndex = 0;
 		this.currentPlayer = player1;

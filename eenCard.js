@@ -9,7 +9,7 @@ class Card extends PIXI.Sprite {
 	// cardColor - one of 'B', 'G', 'R', or 'Y'
 	// cardGlyph - one of '0' - '9', 'R', 'S', 'D', or '69'
 
-	constructor(faceTexture, cardName, cardColor, cardGlyph) {
+	constructor(faceTexture, cardName, cardColor, cardGlyph, cardToolTip) {
 
 		// make a PIXI Sprite
 
@@ -21,6 +21,7 @@ class Card extends PIXI.Sprite {
 		this.cardName = cardName;
 		this.cardColor = cardColor;
 		this.cardGlyph = cardGlyph;
+		this.cardToolTip = cardToolTip;
 		this.faceUp = false;
 		this.big = false;
 
@@ -64,12 +65,17 @@ class Card extends PIXI.Sprite {
 		if (this.loc == player1.hand) {
 			this.big = true;
 			this.moveCardTo(this.x, player1.y - 16, 1.5);
+			this.cardToolTip.x = this.x;
+			this.cardToolTip.y = this.y - Math.floor(this.cardToolTip.height / 2) - 75;
+			stage.addChild(this.cardToolTip);
+			this.cardToolTip.visible = true;
 		}
 	}
 
 	onMouseOut() {
 
 		if (this.loc == player1.hand) {
+			this.cardToolTip.visible = false;
 			this.big = false;
 			this.moveCardTo(this.x, player1.y, 1);
 		}
