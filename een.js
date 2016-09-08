@@ -21,7 +21,7 @@ function update() {
 
 		// changing viewOffset scrolls through the hand
 
-		overHandMask.hand.viewOffset += overHandMask.direction;
+		overHandMask.hand.viewOffset += overHandMask.direction * 2;
 
 		// check if we've hit the end and remove the mask if so
 

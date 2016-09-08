@@ -73,6 +73,8 @@ class Card extends PIXI.Sprite {
 
 			stage.addChild(this.cardToolTip);
 
+			hideAllToolTips();
+
 			this.cardToolTip.visible = true;
 		}
 	}

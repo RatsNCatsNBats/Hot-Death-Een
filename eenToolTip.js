@@ -3,6 +3,8 @@
 
 class ToolTip extends PIXI.Sprite {
 
+	// texture - a PIXI Texture object used to create the sprite
+
 	constructor(texture) {
 
 		super(texture);
@@ -15,6 +17,36 @@ class ToolTip extends PIXI.Sprite {
 
 		stage.addChild(this);
 	}
+}
+
+// hides all the ToolTips
+
+function hideAllToolTips() {
+
+	tooltipBlueShield.visible = false;
+	tooltipDelayedBlast.visible = false;
+	tooltipDoubleSkip.visible = false;
+	tooltipDrawTwo.visible = false;
+	tooltipFucker.visible = false;
+	tooltipGlasnost.visible = false;
+	tooltipHarvesterOfSorrows.visible = false;
+	tooltipHolyDefender.visible = false;
+	tooltipHotDeath.visible = false;
+	tooltipLuckyClover.visible = false;
+	tooltipMagicFive.visible = false;
+	tooltipMutuallyAssuredDestruction.visible = false;
+	tooltipMysteryDraw.visible = false;
+	tooltipNumber.visible = false;
+	tooltipQuitter.visible = false;
+	tooltipReverse.visible = false;
+	tooltipReverseSkip.visible = false;
+	tooltipShitter.visible = false;
+	tooltipSixtyNine.visible = false;
+	tooltipSkip.visible = false;
+	tooltipSpreader.visible = false;
+	tooltipVirus.visible = false;
+	tooltipWild.visible = false;
+	tooltipWildDrawFour.visible = false;
 }
 
 var tooltipBlueShield = new ToolTip(textureRulesBlueShield);
